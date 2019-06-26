@@ -4,6 +4,10 @@ class DockingStation
   
   attr_reader :bike
 
+  def initialize
+    @bikes = []
+  end
+
   def release_bike
     @bike ? @bike : fail('No bikes available')
   end
