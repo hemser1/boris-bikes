@@ -1,17 +1,15 @@
 require 'pry'
 
 class DockingStation
-  #attr_reader :bike
+  
+  attr_reader :bike
 
   def release_bike
-    @bike = Bike.new
+    @bike ? @bike : fail('No bikes available')
   end
 
   def dock(bike)
-    bike
-  end
-
-  def bike
+    @bike = bike
   end
 
 end

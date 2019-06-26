@@ -5,6 +5,20 @@ describe DockingStation do
         expect(DockingStation.new).to respond_to(:release_bike)
     end
 
+    describe '#release_bike' do
+      it 'releases a bike' do
+        bike = Bike.new
+        station = DockingStation.new
+        station.dock(bike)
+        expect(station.release_bike).to eq bike
+      end
+
+      it 'raises an error when there are no bikes available' do
+        station = DockingStation.new
+        expect { station.release_bike }.to raise_error 'No bikes available'
+      end
+    end
+
     it { is_expected.to respond_to(:dock).with(1).argument }
 
     it { is_expected.to respond_to(:bike) }
@@ -15,14 +29,20 @@ describe DockingStation do
       expect(station.dock(bike)).to eq bike
     end
 
-#    it 'gets a bike' do
-#        expect(DockingStation.new.release_bike).to eq Bike.new
-#    end
-end
-
-describe Bike do
-
-    it { is_expected.to respond_to :working?}
-
+    it 'returns docked bikes' do
+        bike = Bike.new
+        station = DockingStation.new
+        station.dock(bike) 
+        expect(station.bike).to eq bike
+    end
 
 end
+
+
+
+
+
+#describe Bike do
+
+ #   it { is_expected.to respond_to :working?}
+#end
