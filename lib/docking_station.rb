@@ -1,6 +1,7 @@
 require 'pry'
 
 class DockingStation
+  DEFAULT_CAPACITY = 20
 
   attr_reader :bike
 
@@ -21,7 +22,7 @@ class DockingStation
   private
 
   def full?
-    @bikes.size >= 20
+    @bikes.count >= DEFAULT_CAPACITY
   end
 
   def empty?
