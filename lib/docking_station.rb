@@ -1,7 +1,7 @@
 require 'pry'
 
 class DockingStation
-  
+
   attr_reader :bike
 
   def initialize
@@ -9,12 +9,25 @@ class DockingStation
   end
 
   def release_bike
-    @bike ? @bike : fail('No bikes available')
+    fail 'No bikes available' if empty?
+    @bikes.pop
   end
 
   def dock(bike)
-    @bike ? fail('Station full') : @bike = bike
+    fail 'Docking station full' if full?
+    @bikes << bike
   end
+
+  private
+
+  def full?
+    @bikes.size >= 20
+  end
+
+  def empty?
+    @bikes.empty?
+  end
+
 
 end
 
@@ -22,4 +35,4 @@ class Bike
   def working?
   end
 end
-# binding.pry
+ #binding.pry
