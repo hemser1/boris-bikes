@@ -20,11 +20,22 @@ DEFAULT_CAPACITY = 20
 
   def release_bike
     fail 'No bikes available' if empty?
-    bikes.pop
+    fail 'No bikes available' if bikes.all? { |bike| bike.working == false }
+    i = 0
+    while i < bikes.length do
+      if bikes[i].working == true
+        bikes.delete_at(i)
+        puts "Bike released"
+        break
+      else
+        i += 1
+      end
+    end
   end
 
   def dock(bike)
     fail 'Docking station full' if full?
+    puts bike.working ? 'Bike working' : 'Bike not working'
     bikes << bike
   end
 
@@ -40,10 +51,16 @@ DEFAULT_CAPACITY = 20
     bikes.empty?
   end
 
+
 end
 
 class Bike
-  def working?
+
+  attr_accessor :working
+
+  def initialize(working = true)
+    @working = working
   end
+
 end
  #binding.pry
